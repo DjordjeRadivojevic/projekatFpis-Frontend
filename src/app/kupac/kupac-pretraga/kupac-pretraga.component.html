@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <form [formGroup]="kupacPretragaForma">
+        <div class="form-row">
+          <div class="col-md-2 text-right">
+            <label for="nazivKupca">Pretraga</label>
+          </div>
+          <div class="col-md-10 text-right">
+            <input
+              #nazivKupca
+              placeholder="Upisi naziv kupca"
+              type="text"
+              id="nazivKupca"
+              class="form-control"
+              formControlName="nazivKupca"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2">
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="pronadjiKupce(nazivKupca.value)"
+      >
+        Pronadji
+      </button>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">PIB</th>
+          <th scope="col">Naziv kupca</th>
+          <th scope="col">Email</th>
+          <th scope="col">Telefon</th>
+          <th scope="col">Grad</th>
+          <th scope="col">Ulica</th>
+          <th scope="col">Broj</th>
+          <th scope="col">Potpis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let kupac of kupci"
+          (click)="selektovanjeKupca(kupac)"
+          [class.selected]="
+            selektovanKupac ? kupac.pib === selektovanKupac.pib : false
+          "
+        >
+          <td>{{ kupac.pib }}</td>
+          <td>{{ kupac.nazivKupca }}</td>
+          <td>{{ kupac.emailKupca }}</td>
+          <td>{{ kupac.telefonKupca }}</td>
+          <td>{{ kupac.adresa.ulica.grad.nazivGrada }}</td>
+          <td>{{ kupac.adresa.ulica.nazivUlice }}</td>
+          <td>{{ kupac.adresa.brojAdrese }}</td>
+          <td>{{ kupac.potpis }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-md-center">
+    <div class="col-md-2">
+      <button
+        type="button"
+        class="btn btn-warning"
+        [disabled]="selektovanKupac ? false : true"
+        (click)="izmeniKupca()"
+      >
+        Izmeni
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button
+        type="button"
+        class="btn btn-danger"
+        [disabled]="selektovanKupac ? false : true"
+        (click)="izbrisiKupca()"
+      >
+        Obrisi
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button
+        type="button"
+        class="btn btn-info"
+        [disabled]="selektovanKupac ? false : true"
+        (click)="prikaziKupca()"
+      >
+        Prikazi
+      </button>
+    </div>
+  </div>
+</div>

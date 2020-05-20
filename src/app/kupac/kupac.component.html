@@ -1,0 +1,36 @@
+<div class="card-body">
+  <ul class="text-center list-inline py-3">
+    <li class="list-inline-item">
+      <a routerLink="/kupac-novi" class="btn btn-success">Dodaj kupca</a>
+    </li>
+    <li class="list-inline-item">
+      <a routerLink="/kupac-pretraga" class="btn btn-warning">Pronadji kupca</a>
+    </li>
+  </ul>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">PIB</th>
+        <th scope="col">Naziv kupca</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">Grad</th>
+        <th scope="col">Ulica</th>
+        <th scope="col">Broj</th>
+        <th scope="col">Potpis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let kupac of kupci">
+        <td>{{ kupac.pib }}</td>
+        <td>{{ kupac.nazivKupca }}</td>
+        <td>{{ kupac.emailKupca }}</td>
+        <td>{{ kupac.telefonKupca }}</td>
+        <td>{{ kupac.adresa.ulica.grad.nazivGrada }}</td>
+        <td>{{ kupac.adresa.ulica.nazivUlice }}</td>
+        <td>{{ kupac.adresa.brojAdrese }}</td>
+        <td>{{ kupac.potpis }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

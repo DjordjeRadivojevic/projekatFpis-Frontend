@@ -1,0 +1,103 @@
+<form [formGroup]="kupacForma">
+  <div class="form-row">
+    <div class="col-md-6">
+      <label for="pib">PIB</label>
+      <input type="text" id="pib" class="form-control" formControlName="pib" />
+    </div>
+    <div class="col-md-6">
+      <label for="nazivKupca">Naziv kupca</label>
+      <input
+        placeholder="Upisi naziv kupca"
+        type="text"
+        id="nazivKupca"
+        class="form-control"
+        formControlName="nazivKupca"
+      />
+    </div>
+  </div>
+  <br />
+  <div class="form-row">
+    <div class="col-md-6">
+      <label for="emailKupca"> Email</label>
+      <input
+        placeholder="Upisi email kupca"
+        type="text"
+        id="emailKupca"
+        class="form-control"
+        formControlName="emailKupca"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="telefonKupca">Telefonski broj</label>
+      <input
+        placeholder="Upisi telefonski broj kupca"
+        type="text"
+        id="telefonKupca"
+        class="form-control"
+        formControlName="telefonKupca"
+      />
+    </div>
+  </div>
+  <hr class="mt-5" />
+  <div class="div-style">Adresa</div>
+  <div class="row">
+    <div class="col-md-4 mt-1">
+      <label for="grad">Grad</label>
+      <select
+        #grad
+        class="form-control"
+        formControlName="grad"
+        (change)="vratiUlice(grad.value)"
+        id="grad"
+      >
+        <option value="" disabled selected hidden>Izaberi grad</option>
+        <option *ngFor="let grad of gradovi" [value]="grad.postanskiBroj">{{
+          grad.nazivGrada
+        }}</option>
+      </select>
+    </div>
+    <div class="col-md-4 mt-1">
+      <label for="ulica">Ulica</label>
+      <select
+        #ulica
+        class="form-control"
+        formControlName="ulica"
+        (change)="vratiAdrese(grad.value, ulica.value)"
+        id="ulica"
+      >
+        <option value="" disabled selected hidden>Izaberi ulicu</option>
+        <option *ngFor="let ulica of ulice" [value]="ulica.sifraUlice">{{
+          ulica.nazivUlice
+        }}</option>
+      </select>
+    </div>
+    <div class="col-md-4 mt-1">
+      <label for="broj">Broj</label>
+      <select id="broj" class="form-control" formControlName="broj">
+        <option value="" disabled selected hidden>Izaberi broj</option>
+        <option *ngFor="let broj of brojevi" [value]="broj.adresaID">{{
+          broj.brojAdrese
+        }}</option>
+      </select>
+    </div>
+  </div>
+  <hr class="mt-5" />
+  <div class="form-row">
+    <div class="col-md-2">
+      <label for="potpisnik">Potpisnik</label>
+      <select id="potpisnik" class="form-control" formControlName="potpis">
+        <option value="" disabled selected hidden>Izaberi potpisnika</option>
+        <option *ngFor="let zaposlen of zaposleni" [value]="zaposlen.jmbg">{{
+          zaposlen.jmbg
+        }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 save-button-margin text-center">
+      <button type="button" class="btn btn-success" (click)="izmeniKupca()">
+        Potvrdi
+      </button>
+    </div>
+  </div>
+</form>

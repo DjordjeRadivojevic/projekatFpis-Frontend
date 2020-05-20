@@ -1,0 +1,289 @@
+<form [formGroup]="fakturaForma" class="p-6">
+  <div class="form-row">
+    <div class="col-md-4">
+      <label for="sifraFakture">Sifra Fakture</label>
+      <input
+        placeholder="Upisi sifru fakture"
+        type="text"
+        id="sifraFakture"
+        class="form-control"
+        formControlName="sifraFakture"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="datumPrometa">Datum Prometa</label>
+      <input
+        placeholder="Upisi datum prometa"
+        type="date"
+        id="datumPrometa"
+        class="form-control"
+        formControlName="datumPrometa"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="valuta">Valuta</label>
+      <input
+        placeholder="Upisi valutu"
+        type="date"
+        id="valuta"
+        class="form-control"
+        formControlName="valuta"
+      />
+    </div>
+  </div>
+  <br />
+  <div class="form-row">
+    <div class="col-md-6">
+      <label for="naciniIsporuke">Nacin isporuke</label>
+      <select
+        id="nacinIsporuke"
+        class="form-control"
+        formControlName="nacinIsporuke"
+      >
+        <option value="" disabled selected hidden
+          >Izaberi nacin isporuke</option
+        >
+        <option
+          *ngFor="let nacinIsporuke of naciniIsporuke"
+          [value]="nacinIsporuke.niID"
+          >{{ nacinIsporuke.tipNacinaIsporuke }}</option
+        >
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="nacinPlacanja">Nacin placanja</label>
+      <select
+        id="nacinPlacanja"
+        class="form-control"
+        formControlName="nacinPlacanja"
+      >
+        <option value="" disabled selected hidden
+          >Izaberi nacin placanja</option
+        >
+        <option
+          *ngFor="let nacinPlacanja of naciniPlacanja"
+          [value]="nacinPlacanja.npID"
+          >{{ nacinPlacanja.vrstaPlacanja }}</option
+        >
+      </select>
+    </div>
+  </div>
+  <hr class="mt-2" />
+  <div class="div-style">Adresa</div>
+  <div class="row">
+    <div class="col-md-4 mt-1">
+      <label for="grad">Grad</label>
+      <select
+        #grad
+        class="form-control"
+        formControlName="grad"
+        (change)="vratiUlice(grad.value)"
+        id="grad"
+      >
+        <option value="" disabled selected hidden>Izaberi grad</option>
+        <option *ngFor="let grad of gradovi" [value]="grad.postanskiBroj">{{
+          grad.nazivGrada
+        }}</option>
+      </select>
+    </div>
+    <div class="col-md-4 mt-1">
+      <label for="ulica">Ulica</label>
+      <select
+        #ulica
+        class="form-control"
+        formControlName="ulica"
+        (change)="vratiAdrese(grad.value, ulica.value)"
+        id="ulica"
+      >
+        <option value="" disabled selected hidden>Izaberi ulicu</option>
+        <option *ngFor="let ulica of ulice" [value]="ulica.sifraUlice">{{
+          ulica.nazivUlice
+        }}</option>
+      </select>
+    </div>
+    <div class="col-md-4 mt-1">
+      <div class="form-group">
+        <label for="broj">Broj</label>
+        <select id="broj" class="form-control" formControlName="broj">
+          <option value="" disabled selected hidden>Izaberi broj</option>
+          <option *ngFor="let broj of brojevi" [value]="broj.adresaID">{{
+            broj.brojAdrese
+          }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <hr class="mt-2" />
+  <form [formGroup]="stavkaFaktureForma" class="border border-success p-3">
+    <div class="form-row">
+      <div class="col-md-4">
+        <label for="brojSF">Broj stavke fakture</label>
+        <input
+          placeholder="Upisi broj stavke fakture"
+          type="text"
+          id="brojSF"
+          class="form-control"
+          formControlName="brojSF"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="opis">Opis</label>
+        <input
+          placeholder="Upisi opis"
+          type="text"
+          id="opis"
+          class="form-control"
+          formControlName="opis"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="ean">EAN</label>
+        <input
+          placeholder="Upisi ean"
+          type="text"
+          id="ean"
+          class="form-control"
+          formControlName="ean"
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <label for="proizvod">Proizvod</label>
+        <select id="proizvod" class="form-control" formControlName="proizvod">
+          <option value="" disabled selected hidden>Izaberi proizvod</option>
+          <option
+            *ngFor="let proiz of proizvodi"
+            [value]="proiz.sifraproizvoda"
+            >{{ proiz.nazivProizvoda }}</option
+          >
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="kolicina">Kolicina</label>
+        <input
+          placeholder="Upisi kolicinu"
+          type="text"
+          id="kolicina"
+          class="form-control"
+          formControlName="kolicina"
+        />
+      </div>
+    </div>
+    <br />
+    <div class="form-row">
+      <div class="col-md-10">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">brojSF</th>
+              <th scope="col">Opis</th>
+              <th scope="col">EAN</th>
+              <th scope="col">Kolicina</th>
+              <th scope="col">Proizvod</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let stavka of stavkeFakture"
+              (click)="selektovanjeStavkeFakture(stavka)"
+              [class.selected]="
+                selektovanaStavkaFaktura
+                  ? stavka.brojSF === selektovanaStavkaFaktura.brojSF
+                  : false
+              "
+            >
+              <ng-container *ngIf="stavka.status !== 'DELETE'">
+                <td>{{ stavka.brojSF }}</td>
+                <td>{{ stavka.opis }}</td>
+                <td>{{ stavka.ean }}</td>
+                <td>{{ stavka.kolicina }}</td>
+                <td>{{ stavka.proizvod.nazivProizvoda }}</td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-2 text-right">
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="sacuvajStavkuFakture()"
+          [disabled]="selektovanaStavkaFaktura ? false : true"
+        >
+          Sacuvaj
+        </button>
+        <br />
+        <br />
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="zapamtiStavkuFakture()"
+        >
+          Unesi stavku
+        </button>
+        <br /><br />
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="izmeniStavkuFakture()"
+          [disabled]="selektovanaStavkaFaktura ? false : true"
+        >
+          Izmeni
+        </button>
+        <br /><br />
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="obrisiStavkuFakture()"
+          [disabled]="selektovanaStavkaFaktura ? false : true"
+        >
+          Obrisi
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="form-row">
+    <div class="col-md-3">
+      <label for="zaposleni">Potpisnik</label>
+      <select id="zaposleni" class="form-control" formControlName="zaposleni">
+        <option value="" disabled selected hidden>Izaberi potpisnika</option>
+        <option
+          *ngFor="let zaposlen of zaposleniLista"
+          [value]="zaposlen.jmbg"
+          >{{ zaposlen.jmbg }}</option
+        >
+      </select>
+    </div>
+    <div class="col-md-3 save-button-margin text-center">
+      <br />
+      <label>
+        <input
+          type="radio"
+          value="PROVERENA"
+          name="stanje"
+          formControlName="stanje"
+        />
+        Proverena</label
+      >
+      <br />
+      <label>
+        <input
+          type="radio"
+          value="VALIDIRANA"
+          name="stanje"
+          formControlName="stanje"
+        />
+        Validirana</label
+      >
+    </div>
+    <div class="col-md-6 save-button-margin text-right">
+      <br />
+      <button type="button" class="btn btn-success" (click)="izmeniFakturu()">
+        Potvrdi
+      </button>
+    </div>
+  </div>
+</form>
+<br />
+<br />

@@ -1,0 +1,140 @@
+<form [formGroup]="fakturaForma" class="p-6">
+  <div class="form-row">
+    <div class="col-md-4">
+      <label for="sifraFakture">Sifra Fakture</label>
+      <input
+        type="text"
+        id="sifraFakture"
+        class="form-control"
+        formControlName="sifraFakture"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="datumPrometa">Datum Prometa</label>
+      <input
+        type="date"
+        id="datumPrometa"
+        class="form-control"
+        formControlName="datumPrometa"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="valuta">Valuta</label>
+      <input
+        type="date"
+        id="valuta"
+        class="form-control"
+        formControlName="valuta"
+      />
+    </div>
+  </div>
+  <br />
+  <div class="form-row">
+    <div class="col-md-6">
+      <label for="nacinIsporuke">Nacin isporuke</label>
+      <input
+        type="text"
+        id="nacinIsporuke"
+        class="form-control"
+        formControlName="nacinIsporuke"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="nacinPlacanja">Nacin placanja</label>
+      <input
+        type="text"
+        id="nacinPlacanja"
+        class="form-control"
+        formControlName="nacinPlacanja"
+      />
+    </div>
+  </div>
+  <hr class="mt-2" />
+  <div class="div-style">Adresa</div>
+  <div class="row">
+    <div class="col-md-4 mt-1">
+      <label for="grad">Grad</label>
+      <input
+        type="text"
+        id="grad"
+        class="form-control"
+        formControlName="grad"
+      />
+    </div>
+    <div class="col-md-4 mt-1">
+      <label for="ulica">Ulica</label>
+      <input
+        type="text"
+        id="ulica"
+        class="form-control"
+        formControlName="ulica"
+      />
+    </div>
+    <div class="col-md-4 mt-1">
+      <div class="form-group">
+        <label for="broj">Broj</label>
+        <input
+          type="text"
+          id="broj"
+          class="form-control"
+          formControlName="broj"
+        />
+      </div>
+    </div>
+  </div>
+  <hr class="mt-2" />
+  <div class="form-row border border-success p-3">
+    <div class="col-md-10">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">brojSF</th>
+            <th scope="col">Opis</th>
+            <th scope="col">EAN</th>
+            <th scope="col">Kolicina</th>
+            <th scope="col">Proizvod</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stavka of stavkeFakture">
+            <td>{{ stavka.brojSF }}</td>
+            <td>{{ stavka.opis }}</td>
+            <td>{{ stavka.ean }}</td>
+            <td>{{ stavka.kolicina }}</td>
+            <td>{{ stavka.proizvod.nazivProizvoda }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-3">
+      <label for="zaposleni">Potpisnik</label>
+      <input
+        type="text"
+        id="zaposleni"
+        class="form-control"
+        formControlName="zaposleni"
+      />
+    </div>
+    <div class="col-md-3 text-center">
+      <br />
+      <input
+        type="checkbox"
+        id="stanje"
+        name="stanje"
+        formControlName="stanje"
+      />
+      <label for="stanje">{{ faktura.stanje }}</label
+      ><br />
+    </div>
+    <div class="col-md-6 save-button-margin text-right">
+      <br />
+      <button type="button" class="btn btn-danger" (click)="vratiNaPretragu()">
+        Zatvori
+      </button>
+    </div>
+  </div>
+</form>
+<br />
+<br />

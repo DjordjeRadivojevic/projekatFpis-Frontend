@@ -1,0 +1,90 @@
+<form [formGroup]="kupacForma">
+  <div class="form-row">
+    <div class="col-md-6">
+      <label for="pib">PIB</label>
+      <input type="text" id="pib" class="form-control" formControlName="pib" />
+    </div>
+    <div class="col-md-6">
+      <label for="nazivKupca">Naziv kupca</label>
+      <input
+        type="text"
+        id="nazivKupca"
+        class="form-control"
+        formControlName="nazivKupca"
+      />
+    </div>
+  </div>
+  <br />
+  <div class="form-row">
+    <div class="col-md-6">
+      <label for="emailKupca"> Email</label>
+      <input
+        type="text"
+        id="emailKupca"
+        class="form-control"
+        formControlName="emailKupca"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="telefonKupca">Telefonski broj:</label>
+      <input
+        type="text"
+        id="telefonKupca"
+        class="form-control"
+        formControlName="telefonKupca"
+      />
+    </div>
+  </div>
+  <hr class="mt-5" />
+  <div class="div-style">Adresa</div>
+  <div class="row">
+    <div class="col-md-4 mt-1">
+      <label for="grad">Grad</label>
+      <input
+        type="text"
+        id="grad"
+        class="form-control"
+        formControlName="grad"
+      />
+    </div>
+    <div class="col-md-4 mt-1">
+      <label for="ulica">Ulica</label>
+      <input
+        type="text"
+        id="ulica"
+        class="form-control"
+        formControlName="ulica"
+      />
+    </div>
+    <div class="col-md-4 mt-1">
+      <div class="form-group">
+        <label for="broj">Broj</label>
+        <input
+          type="text"
+          id="broj"
+          class="form-control"
+          formControlName="broj"
+        />
+      </div>
+    </div>
+  </div>
+  <hr class="mt-5" />
+  <div class="form-row">
+    <div class="col-md-2">
+      <label for="potpis">Potpisnik</label>
+      <input
+        type="text"
+        id="potpis"
+        class="form-control"
+        formControlName="potpis"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 save-button-margin text-center">
+      <button type="button" class="btn btn-danger" (click)="vratiNaPretragu()">
+        Zatvori
+      </button>
+    </div>
+  </div>
+</form>

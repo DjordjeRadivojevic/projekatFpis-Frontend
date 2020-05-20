@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <form [formGroup]="fakturaPretragaForma">
+        <div class="form-row">
+          <div class="col-md-2 text-right">
+            <label for="datumPrometa">Pretraga</label>
+          </div>
+          <div class="col-md-10 text-right">
+            <input
+              #datumPrometa
+              placeholder="Upisi datum prometa dd-MM-yyyy"
+              type="text"
+              id="datumPrometa"
+              class="form-control"
+              formControlName="datumPrometa"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2 text-center">
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="pronadjiFakture(datumPrometa.value)"
+      >
+        Pronadji
+      </button>
+    </div>
+    <div class="col-md-2 text-center">
+      <form [formGroup]="fakturaPretragaForma">
+        <div *ngFor="let st of stanja">
+          <input
+            type="checkbox"
+            (change)="onChange(st.ime, $event.target.checked)"
+          />
+          <label>{{ st.ime }}</label>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Sifra fakture</th>
+          <th scope="col">Datum prometa</th>
+          <th scope="col">Valuta</th>
+          <th scope="col">Potpisnik</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let faktura of cekiraneFakture"
+          (click)="selektovanjeFakture(faktura)"
+          [class.selected]="
+            selektovanaFaktura
+              ? faktura.sifraFakture === selektovanaFaktura.sifraFakture
+              : false
+          "
+        >
+          <td>{{ faktura.sifraFakture }}</td>
+          <td>{{ faktura.datumPrometa }}</td>
+          <td>{{ faktura.valuta }}</td>
+          <td>{{ faktura.zaposleni.jmbg }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-md-center">
+    <div class="col-md-2">
+      <button
+        type="button"
+        class="btn btn-warning"
+        [disabled]="
+          selektovanaFaktura
+            ? selektovanaFaktura.stanje != 'VALIDIRANA'
+              ? false
+              : true
+            : true
+        "
+        (click)="izmeniFakturu()"
+      >
+        Izmeni
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button
+        type="button"
+        class="btn btn-danger"
+        [disabled]="
+          selektovanaFaktura
+            ? selektovanaFaktura.stanje != 'VALIDIRANA'
+              ? false
+              : true
+            : true
+        "
+        (click)="izbrisiFakturu()"
+      >
+        Obrisi
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button
+        type="button"
+        class="btn btn-info"
+        [disabled]="selektovanaFaktura ? false : true"
+        (click)="prikaziFakturu()"
+      >
+        Prikazi
+      </button>
+    </div>
+  </div>
+</div>

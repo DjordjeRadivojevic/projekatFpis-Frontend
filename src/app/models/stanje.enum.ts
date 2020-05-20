@@ -1,0 +1,5 @@
+export enum Stanje {
+  POPUNJENA = 'POPUNJENA',
+  PROVERENA = 'PROVERENA',
+  VALIDIRANA = 'VALIDIRANA',
+}
