@@ -84,7 +84,11 @@ export class KupacIzmeniComponent implements OnInit {
     this.kupacForma.controls['nazivKupca'].updateValueAndValidity();
     this.kupacForma.controls['emailKupca'].setValidators(Validators.required);
     this.kupacForma.controls['emailKupca'].updateValueAndValidity();
-    this.kupacForma.controls['telefonKupca'].setValidators(Validators.required);
+    this.kupacForma.controls['telefonKupca'].setValidators([
+      Validators.required,
+      Validators.minLength(5),
+      Validators.pattern('^[0-9]*$'),
+    ]);
     this.kupacForma.controls['telefonKupca'].updateValueAndValidity();
     this.kupacForma.controls['potpis'].setValidators(Validators.required);
     this.kupacForma.controls['potpis'].updateValueAndValidity();

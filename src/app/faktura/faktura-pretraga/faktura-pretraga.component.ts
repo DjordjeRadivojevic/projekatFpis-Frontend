@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FakturaService } from 'src/app/services/faktura.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { Faktura } from 'src/app/models/faktura.model';
 import { Stanje } from 'src/app/models/stanje.enum';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-faktura-pretraga',
@@ -55,7 +62,12 @@ export class FakturaPretragaComponent implements OnInit {
   }
 
   pronadjiFakture(datumPrometa: string) {
-    if (datumPrometa) {
+    this.fakturaPretragaForma.controls['datumPrometa'].setValidators([
+      Validators.required,
+      Validators.pattern('^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$'),
+    ]);
+    this.fakturaPretragaForma.controls['datumPrometa'].updateValueAndValidity();
+    if (this.fakturaPretragaForma.valid) {
       return this.fakturaService
         .pronadjiFakture(datumPrometa)
         .subscribe((data: Faktura[]) => {
@@ -66,6 +78,7 @@ export class FakturaPretragaComponent implements OnInit {
         });
     } else {
       this.fakture = [];
+      this.cekiraneFakture = [];
       this.selektovanaFaktura = undefined;
       this.prikazPorukeError = true;
     }

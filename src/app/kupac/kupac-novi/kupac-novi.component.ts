@@ -62,6 +62,7 @@ export class KupacNoviComponent implements OnInit {
     this.kupacForma.controls['telefonKupca'].setValidators([
       Validators.required,
       Validators.minLength(5),
+      Validators.pattern('^[0-9]*$'),
     ]);
     this.kupacForma.controls['telefonKupca'].updateValueAndValidity();
     this.kupacForma.controls['potpis'].setValidators(Validators.required);
