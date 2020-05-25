@@ -21,6 +21,7 @@ export class KupacIzmeniComponent implements OnInit {
   ulice: Ulica[] = [];
   brojevi: Adresa[] = [];
   zaposleni: Zaposleni[] = [];
+  prikazPorukeError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -113,14 +114,10 @@ export class KupacIzmeniComponent implements OnInit {
       };
 
       this.kupacService.izmeniKupca(kupac).subscribe((data: Kupac) => {
-        if (data) {
-          this.vratiNaSveKupce();
-        } else {
-          // obavestenje da nije zapamtilo
-        }
+        this.vratiNaSveKupce();
       });
     } else {
-      //obavestenje da forma nije validna ili setuj validations poruke na formu
+      this.prikazPorukeError = !this.kupacForma.valid;
     }
   }
 

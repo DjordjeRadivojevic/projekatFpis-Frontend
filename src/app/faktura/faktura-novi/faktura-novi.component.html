@@ -1,4 +1,7 @@
 <form [formGroup]="fakturaForma" class="p-6">
+  <p *ngIf="prikazPorukeFakturaError" class="alert alert-danger">
+    Uneli ste pogresne podatke. Molimo Vas unesite ispravne podatke fakture.
+  </p>
   <div class="form-row">
     <div class="col-md-4">
       <label for="sifraFakture">Sifra Fakture</label>
@@ -114,7 +117,14 @@
     </div>
   </div>
   <hr class="mt-2" />
+  <p *ngIf="prikazPorukeMinimumStavkeError" class="alert alert-danger">
+    Molimo Vas unesite najmanje jednu stavku fakture.
+  </p>
   <form [formGroup]="stavkaFaktureForma" class="border border-success p-3">
+    <p *ngIf="prikazPorukeStavkaError" class="alert alert-danger">
+      Uneli ste pogresne podatke. Molimo Vas unesite ispravne podatke stavke
+      fakture.
+    </p>
     <div class="form-row">
       <div class="col-md-4">
         <label for="brojSF">Broj stavke fakture</label>
@@ -198,6 +208,7 @@
         <button
           type="button"
           class="btn btn-success"
+          [disabled]="stavkaFaktureForma.disabled"
           (click)="zapamtiStavkuFakture()"
         >
           Unesi stavku

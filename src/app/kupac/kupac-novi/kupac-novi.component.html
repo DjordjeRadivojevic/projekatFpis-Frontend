@@ -1,4 +1,7 @@
 <form [formGroup]="kupacForma">
+  <p *ngIf="prikazPorukeError" class="alert alert-danger">
+    Uneli ste pogresne podatke. Molimo Vas unesite ispravne podatke kupca.
+  </p>
   <div class="form-row">
     <div class="col-md-6">
       <label for="pib">PIB</label>
@@ -91,7 +94,7 @@
   </div>
   <hr class="mt-5" />
   <div class="form-row">
-    <div class="col-md-2">
+    <div class="col-md-3">
       <label for="potpisnik">Potpisnik</label>
       <select id="potpisnik" class="form-control" formControlName="potpis">
         <option value="" disabled selected hidden>Izaberi potpisnika</option>

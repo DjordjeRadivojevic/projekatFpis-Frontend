@@ -20,6 +20,7 @@ export class KupacNoviComponent implements OnInit {
   ulice: Ulica[] = [];
   brojevi: Adresa[] = [];
   zaposleni: Zaposleni[] = [];
+  prikazPorukeError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,7 +59,10 @@ export class KupacNoviComponent implements OnInit {
     this.kupacForma.controls['nazivKupca'].updateValueAndValidity();
     this.kupacForma.controls['emailKupca'].setValidators(Validators.required);
     this.kupacForma.controls['emailKupca'].updateValueAndValidity();
-    this.kupacForma.controls['telefonKupca'].setValidators(Validators.required);
+    this.kupacForma.controls['telefonKupca'].setValidators([
+      Validators.required,
+      Validators.minLength(5),
+    ]);
     this.kupacForma.controls['telefonKupca'].updateValueAndValidity();
     this.kupacForma.controls['potpis'].setValidators(Validators.required);
     this.kupacForma.controls['potpis'].updateValueAndValidity();
@@ -88,14 +92,10 @@ export class KupacNoviComponent implements OnInit {
       };
 
       this.kupacService.zapamtiKupca(kupac).subscribe((data: Kupac) => {
-        if (data) {
-          this.navigateKupacLista();
-        } else {
-          // obavestenje da nije zapamtilo
-        }
+        this.navigateKupacLista();
       });
     } else {
-      //obavestenje da forma nije validna ili setuj validations poruke na formu
+      this.prikazPorukeError = !this.kupacForma.valid;
     }
   }
 

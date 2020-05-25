@@ -32,6 +32,8 @@ export class FakturaIzmeniComponent implements OnInit {
   naciniPlacanja: NacinPlacanja[];
   proizvodi: Proizvod[];
   selektovanaStavkaFaktura: StavkaFakture;
+  prikazPorukeFakturaError: boolean = false;
+  prikazPorukeStavkaError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,6 +71,7 @@ export class FakturaIzmeniComponent implements OnInit {
                 this.proizvodi = data;
               });
             this.faktura = data;
+            this.stavkeFakture = data.stavkeFakture;
             this.adresaService.vratiSveGradove().subscribe((data: Grad[]) => {
               this.gradovi = data;
             });
@@ -88,7 +91,6 @@ export class FakturaIzmeniComponent implements OnInit {
 
             this.kreirajFakturaFormu();
             this.kreirajStavkaFaktureForma();
-            this.stavkeFakture = this.faktura.stavkeFakture;
           });
       }
     });
@@ -117,7 +119,6 @@ export class FakturaIzmeniComponent implements OnInit {
       grad: [this.faktura ? this.faktura.adresa.ulica.grad.postanskiBroj : ''],
       ulica: [this.faktura ? this.faktura.adresa.ulica.sifraUlice : ''],
       broj: [this.faktura ? this.faktura.adresa.adresaID : ''],
-      // stavkeFakture lista koja se popunjava
     });
   }
 
@@ -128,8 +129,6 @@ export class FakturaIzmeniComponent implements OnInit {
       ean: [''],
       kolicina: [''],
       proizvod: [''],
-      // faktura traba da se setuje pre dodavanja u fakturu a mozda i ne jer to radim na bekendu
-      // status se setuje na INSERT automatski
     });
   }
 
@@ -189,16 +188,17 @@ export class FakturaIzmeniComponent implements OnInit {
         },
         stavkeFakture: this.stavkeFakture,
       };
+      this.prikazPorukeFakturaError = false;
 
       this.fakturaService.izmeniFakturu(faktura).subscribe((data: Faktura) => {
         if (data) {
           this.vratiNaSveFakture();
         } else {
-          // obavestenje da nije zapamtilo
+          this.prikazPorukeFakturaError = true;
         }
       });
     } else {
-      //obavestenje da forma nije validna ili setuj validations poruke na formu
+      this.prikazPorukeFakturaError = true;
     }
   }
 
@@ -222,8 +222,9 @@ export class FakturaIzmeniComponent implements OnInit {
 
     let nemaTakveStavke: boolean =
       this.stavkeFakture.filter(
-        (s) => s.brojSF === this.stavkaFaktureForma.get('brojSF').value
+        (s) => s.brojSF == this.stavkaFaktureForma.get('brojSF').value
       ).length < 1;
+    console.log('ovo je niz stavki', this.stavkeFakture);
     if (this.stavkaFaktureForma.valid && nemaTakveStavke) {
       let stavka: StavkaFakture = {
         brojSF: this.stavkaFaktureForma.get('brojSF').value,
@@ -248,9 +249,9 @@ export class FakturaIzmeniComponent implements OnInit {
       if (this.proizvodi.length === 0) {
         this.stavkaFaktureForma.disable();
       }
-      // mozda resetuj tabelu sa stavkama da se prikazu stavke
+      this.prikazPorukeStavkaError = false;
     } else {
-      //obavestenje da forma nije validna ili setuj validations poruke na formu i da stavka ne moze da se unese
+      this.prikazPorukeStavkaError = true;
     }
   }
 
@@ -318,13 +319,14 @@ export class FakturaIzmeniComponent implements OnInit {
       ).nazivProizvoda;
       stavkaZaIzmenu.proizvod = proizvod;
       stavkaZaIzmenu.status = Status.UPDATE;
+      this.prikazPorukeStavkaError = false;
+      this.stavkaFaktureForma.reset();
+      this.stavkaFaktureForma.controls['proizvod'].setValue('');
+      this.stavkaFaktureForma.controls['brojSF'].enable();
+      this.selektovanaStavkaFaktura = undefined;
     } else {
-      //vrati poruku da nije bilo validno za izmenu
+      this.prikazPorukeStavkaError = true;
     }
-    this.stavkaFaktureForma.reset();
-    this.stavkaFaktureForma.controls['proizvod'].setValue('');
-    this.stavkaFaktureForma.controls['brojSF'].enable();
-    this.selektovanaStavkaFaktura = undefined;
   }
 
   izmeniStavkuFakture() {
@@ -344,6 +346,7 @@ export class FakturaIzmeniComponent implements OnInit {
     this.stavkaFaktureForma.controls['proizvod'].setValue(
       this.selektovanaStavkaFaktura.proizvod.sifraproizvoda
     );
+    this.prikazPorukeStavkaError = false;
   }
 
   obrisiStavkuFakture() {

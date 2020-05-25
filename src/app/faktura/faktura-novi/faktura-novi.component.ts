@@ -31,6 +31,9 @@ export class FakturaNoviComponent implements OnInit {
   ulice: Ulica[] = [];
   brojevi: Adresa[] = [];
   zaposleniLista: Zaposleni[] = [];
+  prikazPorukeFakturaError: boolean = false;
+  prikazPorukeStavkaError: boolean = false;
+  prikazPorukeMinimumStavkeError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -68,14 +71,12 @@ export class FakturaNoviComponent implements OnInit {
       sifraFakture: [''],
       datumPrometa: [''],
       valuta: [''],
-      //stanje POPUNJENA
       nacinIsporuke: [''],
       nacinPlacanja: [''],
       zaposleni: [''],
       grad: [''],
       ulica: [{ value: '', disabled: true }],
       broj: [{ value: '', disabled: true }],
-      // stavkeFakture lista koja se popunjava
     });
   }
 
@@ -86,8 +87,7 @@ export class FakturaNoviComponent implements OnInit {
       ean: [''],
       kolicina: [''],
       proizvod: [''],
-      // faktura traba da se setuje pre dodavanja u fakturu a mozda i ne jer to radim na bekendu
-      // status se setuje na INSERT automatski
+      // setovanje fakture za stavku radim na bekendu
     });
   }
 
@@ -111,7 +111,7 @@ export class FakturaNoviComponent implements OnInit {
 
     let nemaTakveStavke: boolean =
       this.stavkeFakture.filter(
-        (s) => s.brojSF === this.stavkaFaktureForma.get('brojSF').value
+        (s) => s.brojSF == this.stavkaFaktureForma.get('brojSF').value
       ).length < 1;
     if (this.stavkaFaktureForma.valid && nemaTakveStavke) {
       let stavka: StavkaFakture = {
@@ -137,9 +137,10 @@ export class FakturaNoviComponent implements OnInit {
       if (this.proizvodi.length === 0) {
         this.stavkaFaktureForma.disable();
       }
-      // mozda resetuj tabelu sa stavkama da se prikazu stavke
+      this.prikazPorukeStavkaError = false;
+      this.prikazPorukeMinimumStavkeError = false;
     } else {
-      //obavestenje da forma nije validna ili setuj validations poruke na formu i da stavka ne moze da se unese
+      this.prikazPorukeStavkaError = true;
     }
   }
 
@@ -199,14 +200,14 @@ export class FakturaNoviComponent implements OnInit {
       };
 
       this.fakturaService.zapamtiFakturu(faktura).subscribe((data: Faktura) => {
-        if (data) {
-          this.navigateFaktureLista();
-        } else {
-          // obavestenje da nije zapamtilo
-        }
+        this.navigateFaktureLista();
+        this.prikazPorukeFakturaError = false;
       });
     } else {
-      //obavestenje da forma nije validna ili setuj validations poruke na formu
+      this.prikazPorukeFakturaError = true;
+      if (this.stavkeFakture.length < 1) {
+        this.prikazPorukeMinimumStavkeError = true;
+      }
     }
   }
 

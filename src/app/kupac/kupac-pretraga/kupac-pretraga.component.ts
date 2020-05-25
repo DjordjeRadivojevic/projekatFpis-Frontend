@@ -13,6 +13,7 @@ export class KupacPretragaComponent implements OnInit {
   kupacPretragaForma: FormGroup;
   kupci: Kupac[] = [];
   selektovanKupac: Kupac;
+  prikazPorukeError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,10 +33,12 @@ export class KupacPretragaComponent implements OnInit {
         .pronadjiKupce(nazivKupca)
         .subscribe((data: Kupac[]) => {
           this.kupci = data;
+          this.prikazPorukeError = false;
         });
     } else {
       this.kupci = [];
       this.selektovanKupac = undefined;
+      this.prikazPorukeError = true;
     }
   }
 

@@ -1,4 +1,7 @@
 <div class="container">
+  <p class="alert alert-danger" *ngIf="prikazPorukeError">
+    Uneli ste pogresne podatke. Molimo Vas unesite ispravne podatke pretrage.
+  </p>
   <div class="row">
     <div class="col-md-8">
       <form [formGroup]="fakturaPretragaForma">

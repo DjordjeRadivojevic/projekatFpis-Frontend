@@ -17,6 +17,7 @@ export class FakturaPretragaComponent implements OnInit {
   cekiraneFakture: Faktura[] = [];
   selektovanaFaktura: Faktura;
   selektovanaStanja: String[];
+  prikazPorukeError: boolean = false;
   stanja = [
     { ime: Stanje.POPUNJENA },
     { ime: Stanje.PROVERENA },
@@ -61,10 +62,12 @@ export class FakturaPretragaComponent implements OnInit {
           this.fakture = data;
           this.cekiraneFakture = data;
           this.selektovanaFaktura = undefined;
+          this.prikazPorukeError = false;
         });
     } else {
       this.fakture = [];
       this.selektovanaFaktura = undefined;
+      this.prikazPorukeError = true;
     }
   }
 
