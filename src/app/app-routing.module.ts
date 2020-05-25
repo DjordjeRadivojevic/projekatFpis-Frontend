@@ -12,6 +12,7 @@ import { FakturaPrikaziComponent } from './faktura/faktura-pretraga/faktura-prik
 import { FakturaIzmeniComponent } from './faktura/faktura-pretraga/faktura-izmeni/faktura-izmeni.component';
 
 const routes: Routes = [
+  { path: '', component: KupacComponent },
   { path: 'kupac-svi', component: KupacComponent },
   { path: 'kupac-novi', component: KupacNoviComponent },
   { path: 'kupac-pretraga', component: KupacPretragaComponent },

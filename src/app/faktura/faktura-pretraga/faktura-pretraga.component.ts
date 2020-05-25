@@ -89,20 +89,24 @@ export class FakturaPretragaComponent implements OnInit {
   }
 
   izbrisiFakturu() {
-    this.fakturaService
-      .izbrisiFakturu(this.selektovanaFaktura.sifraFakture)
-      .subscribe(() => {
-        return this.pronadjiFakture(
-          this.fakturaPretragaForma.get('datumPrometa').value
-        );
-      });
-    this.selektovanaFaktura = undefined;
+    if (this.selektovanaFaktura.stanje != 'VALIDIRANA') {
+      this.fakturaService
+        .izbrisiFakturu(this.selektovanaFaktura.sifraFakture)
+        .subscribe(() => {
+          return this.pronadjiFakture(
+            this.fakturaPretragaForma.get('datumPrometa').value
+          );
+        });
+      this.selektovanaFaktura = undefined;
+    }
   }
   izmeniFakturu() {
-    this.router.navigate([
-      'faktura-izmeni',
-      this.selektovanaFaktura.sifraFakture,
-    ]);
+    if (this.selektovanaFaktura.stanje != 'VALIDIRANA') {
+      this.router.navigate([
+        'faktura-izmeni',
+        this.selektovanaFaktura.sifraFakture,
+      ]);
+    }
   }
   prikaziFakturu() {
     this.router.navigate([
