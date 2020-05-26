@@ -14,11 +14,13 @@ import { Faktura } from 'src/app/models/faktura.model';
 import { Stanje } from 'src/app/models/stanje.enum';
 import { Status } from 'src/app/models/status.enum';
 import { Proizvod } from 'src/app/models/proizvod.model';
+import { fadeAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-faktura-novi',
   templateUrl: './faktura-novi.component.html',
   styleUrls: ['./faktura-novi.component.css'],
+  animations: [fadeAnimation],
 })
 export class FakturaNoviComponent implements OnInit {
   fakturaForma: FormGroup;

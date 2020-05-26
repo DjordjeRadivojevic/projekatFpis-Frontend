@@ -1,4 +1,4 @@
-<div class="card-body">
+<div @fadeAnimation>
   <ul class="text-center list-inline py-3">
     <li class="list-inline-item">
       <a routerLink="/faktura-novi" class="btn btn-outline-success"
@@ -25,7 +25,7 @@
         <th scope="col">Potpis</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody [@tableAnimation]="fakture">
       <tr *ngFor="let faktura of fakture">
         <td>{{ faktura.sifraFakture }}</td>
         <td>{{ faktura.datumPrometa }}</td>

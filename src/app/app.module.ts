@@ -19,6 +19,7 @@ import { FakturaNoviComponent } from './faktura/faktura-novi/faktura-novi.compon
 import { FakturaPretragaComponent } from './faktura/faktura-pretraga/faktura-pretraga.component';
 import { FakturaIzmeniComponent } from './faktura/faktura-pretraga/faktura-izmeni/faktura-izmeni.component';
 import { FakturaPrikaziComponent } from './faktura/faktura-pretraga/faktura-prikazi/faktura-prikazi.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { FakturaPrikaziComponent } from './faktura/faktura-pretraga/faktura-prik
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [KupacService, AdresaService, FakturaService],
   bootstrap: [AppComponent],

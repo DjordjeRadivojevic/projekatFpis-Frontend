@@ -13,11 +13,13 @@ import { NacinPlacanja } from 'src/app/models/nacinPlacanja.model';
 import { Proizvod } from 'src/app/models/proizvod.model';
 import { StavkaFakture } from 'src/app/models/stavkaFakture.model';
 import { Status } from 'src/app/models/status.enum';
+import { fadeAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-faktura-izmeni',
   templateUrl: './faktura-izmeni.component.html',
   styleUrls: ['./faktura-izmeni.component.css'],
+  animations: [fadeAnimation],
 })
 export class FakturaIzmeniComponent implements OnInit {
   fakturaForma: FormGroup;

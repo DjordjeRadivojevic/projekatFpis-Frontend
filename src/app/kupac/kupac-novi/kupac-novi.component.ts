@@ -8,11 +8,13 @@ import { AdresaService } from 'src/app/services/adresa.service';
 import { Zaposleni } from 'src/app/models/zaposleni.model';
 import { Ulica } from 'src/app/models/ulica.model';
 import { Adresa } from 'src/app/models/adresa.model';
+import { fadeAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-kupac-novi',
   templateUrl: './kupac-novi.component.html',
   styleUrls: ['./kupac-novi.component.css'],
+  animations: [fadeAnimation],
 })
 export class KupacNoviComponent implements OnInit {
   kupacForma: FormGroup;

@@ -1,4 +1,4 @@
-<div class="card-body">
+<div @fadeAnimation>
   <ul class="text-center list-inline py-3">
     <li class="list-inline-item">
       <a routerLink="/kupac-novi" class="btn btn-outline-success"
@@ -24,7 +24,7 @@
         <th>Potpis</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody [@tableAnimation]="kupci">
       <tr *ngFor="let kupac of kupci">
         <td>{{ kupac.pib }}</td>
         <td>{{ kupac.nazivKupca }}</td>

@@ -10,12 +10,13 @@ import {
 } from '@angular/forms';
 import { Faktura } from 'src/app/models/faktura.model';
 import { Stanje } from 'src/app/models/stanje.enum';
-import { element } from 'protractor';
+import { fadeAnimation, tableAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-faktura-pretraga',
   templateUrl: './faktura-pretraga.component.html',
   styleUrls: ['./faktura-pretraga.component.css'],
+  animations: [fadeAnimation, tableAnimation],
 })
 export class FakturaPretragaComponent implements OnInit {
   fakturaPretragaForma: FormGroup;

@@ -4,11 +4,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FakturaService } from 'src/app/services/faktura.service';
 import { Faktura } from 'src/app/models/faktura.model';
 import { StavkaFakture } from 'src/app/models/stavkaFakture.model';
+import { fadeAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-faktura-prikazi',
   templateUrl: './faktura-prikazi.component.html',
   styleUrls: ['./faktura-prikazi.component.css'],
+  animations: [fadeAnimation],
 })
 export class FakturaPrikaziComponent implements OnInit {
   fakturaForma: FormGroup;

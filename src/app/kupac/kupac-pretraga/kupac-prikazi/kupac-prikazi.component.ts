@@ -4,11 +4,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { KupacService } from 'src/app/services/kupac.service';
 import { Kupac } from 'src/app/models/kupac.model';
 import { Location } from '@angular/common';
+import { fadeAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-kupac-prikazi',
   templateUrl: './kupac-prikazi.component.html',
   styleUrls: ['./kupac-prikazi.component.css'],
+  animations: [fadeAnimation],
 })
 export class KupacPrikaziComponent implements OnInit {
   kupacForma: FormGroup;

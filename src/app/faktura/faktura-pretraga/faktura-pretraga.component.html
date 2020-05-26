@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" @fadeAnimation>
   <p class="alert alert-danger" *ngIf="prikazPorukeError">
     Uneli ste pogresne podatke. Molimo Vas unesite ispravne podatke pretrage.
   </p>
@@ -54,7 +54,7 @@
           <th scope="col">Potpisnik</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody [@tableAnimation]="cekiraneFakture">
         <tr
           *ngFor="let faktura of cekiraneFakture"
           (click)="selektovanjeFakture(faktura)"

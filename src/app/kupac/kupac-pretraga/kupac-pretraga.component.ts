@@ -3,11 +3,13 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { KupacService } from 'src/app/services/kupac.service';
 import { Kupac } from 'src/app/models/kupac.model';
+import { fadeAnimation, tableAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-kupac-pretraga',
   templateUrl: './kupac-pretraga.component.html',
   styleUrls: ['./kupac-pretraga.component.css'],
+  animations: [fadeAnimation, tableAnimation],
 })
 export class KupacPretragaComponent implements OnInit {
   kupacPretragaForma: FormGroup;
@@ -34,11 +36,12 @@ export class KupacPretragaComponent implements OnInit {
         .subscribe((data: Kupac[]) => {
           this.kupci = data;
           this.prikazPorukeError = false;
+          this.selektovanKupac = undefined;
         });
     } else {
       this.kupci = [];
-      this.selektovanKupac = undefined;
       this.prikazPorukeError = true;
+      this.selektovanKupac = undefined;
     }
   }
 
