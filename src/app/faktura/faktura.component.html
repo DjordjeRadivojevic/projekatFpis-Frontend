@@ -17,12 +17,11 @@
         <th>Sifra fakture</th>
         <th>Datum prometa</th>
         <th>Valuta</th>
-        <th>Nacin placanja</th>
         <th>Nacin isporuke</th>
+        <th>Nacin placanja</th>
         <th>Grad</th>
         <th>Ulica</th>
         <th>Broj</th>
-        <th>Potpis</th>
       </tr>
     </thead>
     <tbody [@tableAnimation]="fakture">
@@ -35,7 +34,6 @@
         <td>{{ faktura.adresa.ulica.grad.nazivGrada }}</td>
         <td>{{ faktura.adresa.ulica.nazivUlice }}</td>
         <td>{{ faktura.adresa.brojAdrese }}</td>
-        <td>{{ faktura.zaposleni.jmbg }}</td>
       </tr>
     </tbody>
   </table>
