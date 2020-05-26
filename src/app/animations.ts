@@ -21,9 +21,9 @@ export const tableAnimation = trigger('tableAnimation', [
       [
         style({ opacity: 0, transform: 'translateX(100px)' }),
         stagger(
-          '85ms',
+          '75ms',
           animate(
-            '650ms ease-out',
+            '150ms ease-out',
             style({ opacity: 1, transform: 'translateX(0px)' })
           )
         ),
