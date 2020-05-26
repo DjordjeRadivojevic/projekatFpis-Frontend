@@ -86,7 +86,7 @@
   </div>
   <hr class="mt-5" />
   <div class="form-row">
-    <div class="col-md-2">
+    <div class="col-md-3">
       <label for="potpisnik">Potpisnik</label>
       <select id="potpisnik" class="form-control" formControlName="potpis">
         <option value="" disabled selected hidden>Izaberi potpisnika</option>
@@ -98,7 +98,11 @@
   </div>
   <div class="row">
     <div class="col-md-12 save-button-margin text-center">
-      <button type="button" class="btn btn-success" (click)="izmeniKupca()">
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        (click)="izmeniKupca()"
+      >
         Potvrdi
       </button>
     </div>

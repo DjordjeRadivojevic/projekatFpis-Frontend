@@ -207,7 +207,7 @@
       <div class="col-md-2">
         <button
           type="button"
-          class="btn btn-success"
+          class="btn btn-outline-success"
           [disabled]="stavkaFaktureForma.disabled"
           (click)="zapamtiStavkuFakture()"
         >
@@ -230,7 +230,11 @@
     </div>
     <div class="col-md-9 save-button-margin text-right">
       <br />
-      <button type="button" class="btn btn-success" (click)="zapamtiFakturu()">
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        (click)="zapamtiFakturu()"
+      >
         Potvrdi
       </button>
     </div>

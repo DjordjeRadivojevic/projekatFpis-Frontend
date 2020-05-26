@@ -1,7 +1,7 @@
 .masthead {
   height: auto;
   min-height: 100vh;
-  background-image: url("https://mdbootstrap.com/img/Photos/Others/images/91.jpg");
+  background-image: url("/assets/images/fpis-bg.jpg");
   background-size: cover;
   background-position: center;
 }

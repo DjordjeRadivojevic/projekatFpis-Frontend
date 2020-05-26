@@ -25,7 +25,7 @@
     <div class="col-md-2">
       <button
         type="button"
-        class="btn btn-warning"
+        class="btn btn-outline-warning"
         (click)="pronadjiKupce(nazivKupca.value)"
       >
         Pronadji
@@ -72,7 +72,7 @@
     <div class="col-md-2">
       <button
         type="button"
-        class="btn btn-warning"
+        class="btn btn-outline-warning"
         [disabled]="selektovanKupac ? false : true"
         (click)="izmeniKupca()"
       >
@@ -82,7 +82,7 @@
     <div class="col-md-2">
       <button
         type="button"
-        class="btn btn-danger"
+        class="btn btn-outline-danger"
         [disabled]="selektovanKupac ? false : true"
         (click)="izbrisiKupca()"
       >
@@ -92,7 +92,7 @@
     <div class="col-md-2">
       <button
         type="button"
-        class="btn btn-info"
+        class="btn btn-outline-info"
         [disabled]="selektovanKupac ? false : true"
         (click)="prikaziKupca()"
       >
